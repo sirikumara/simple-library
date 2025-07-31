@@ -18,7 +18,7 @@ public class BorrowerAgent {
     private final BorrowerService borrowerService;
     private final BorrowerValidator borrowerValidator;
 
-    public ResponseEntity<?> register(BorrowerDTO borrowerDTO) {
+    public ResponseEntity<String> register(BorrowerDTO borrowerDTO) {
         borrowerValidator.validate(borrowerDTO);
         Borrower borrower = borrowerConverter.convert(borrowerDTO);
         borrower.setReference(UUID.randomUUID().toString());
