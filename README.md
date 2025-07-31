@@ -20,6 +20,17 @@ A Spring Boot application for managing book borrowings and returns in a library 
   - RETURNED
 - Global exception handling with `@ControllerAdvice`
 - Profiles for local, dev, and prod environments
+  - H2 database for local environment
+  - MySql is for dev and production environment. Set up in docker compose
+
+---
+
+## 🚀 Assumptions
+1. Borrower name and email is required
+2. Borrower email is unique to identify user uniquely.
+3. Reference number is generated automatically to identify borrower and book copy uniquely for external usages
+4. A Generated Unique Book Reference is pasted on the book.
+5. A Generated Unique Borrower Reference is given to him.
 
 ---
 
@@ -32,6 +43,11 @@ A Spring Boot application for managing book borrowings and returns in a library 
 - Lombok
 - Swagger (springdoc-openapi)
 - Maven
+- MySql is used because
+  - Relational Data Modeling
+  - Free & Widely Supported
+  - Structured Queries with SQL
+  - Data Integrity & Validation
 
 ---
 
@@ -47,11 +63,11 @@ A Spring Boot application for managing book borrowings and returns in a library 
 ```bash
 # Clone the repo
 git clone https://github.com/sirikumara/simple-library.git
-cd book-loan-api
  
-#Set the correct profile(dev, prod) with application properties
+ 
+#Set the profile(dev, prod) with application properties
   - spring.profiles.active=
 
 # Or build and run
 ./mvn clean install
-java -jar target/simple-library-1.0.0-SNAPSHOT.jar
+java -jar application/target/simple-library-1.0.0-SNAPSHOT.jar

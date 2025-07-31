@@ -27,7 +27,7 @@ public class BookLoanAgent {
     private final BorrowerService borrowerService;
     private final BookLoanValidator bookLoanValidator;
 
-    public ResponseEntity<?> loanBook(BookLoanDTO bookLoanDTO) {
+    public ResponseEntity<String> loanBook(BookLoanDTO bookLoanDTO) {
         bookLoanValidator.validateBookLoan(bookLoanDTO);
         BookCopy bookCopy = bookCopyService.findByReference(bookLoanDTO.getBookReference());
         Borrower borrower = borrowerService.getBorrower(bookLoanDTO.getBorrowerReference());
@@ -40,7 +40,7 @@ public class BookLoanAgent {
         return ResponseEntity.status(201).body("Book loan created for book ref:" + bookLoanDTO.getBookReference());
     }
 
-    public ResponseEntity<?> returnBook(BookReturnDTO bookReturnDTO) {
+    public ResponseEntity<BookReturnResponseDTO> returnBook(BookReturnDTO bookReturnDTO) {
         BookCopy bookCopy = bookCopyService.findByReference(bookReturnDTO.getBookReference());
         BookLoan bookLoan = bookLoanService.findByBook(bookCopy);
         bookLoan.setStatus(LoanStatus.RETURNED);
